@@ -1,13 +1,13 @@
 #ifndef PUSHSWAP_H
 # define PUSHSWAP_H
 
-# include "libft.h"
+// # include "libft.h"
 
-typedef struct s_list
+typedef struct s_stack
 {
-	int				nb;
-	struct s_list	*next;
-}	t_list;
+	int				content;
+	struct s_stack	*next;
+}	t_stack;
 
 typedef	struct simplify
 {
@@ -15,5 +15,7 @@ typedef	struct simplify
 	int	original_pos;
 	int	simple;
 }	t_list;
+
+void	swap_cmd(t_stack *lst);
 
 #endif

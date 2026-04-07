@@ -1,10 +1,15 @@
 #include "pushswap.h"
 
-void	swap(int *a, int *b)
+void	swap_cmd(t_stack *lst)
 {
-	int	temp;
+	int	val1;
+	int	val2;
+	int temp;
 
-	temp = *a;
-	*a = *b;
-	*b = temp;
+	val1 = lst->content;
+	lst = lst->next;
+	val2 = lst->content;
+	temp = val1;
+	val1 = val2;
+	val2 = temp;
 }
