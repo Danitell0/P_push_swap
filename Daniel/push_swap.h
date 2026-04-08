@@ -3,19 +3,22 @@
 
 # include "libft/libft.h"
 
-typedef struct s_stack
-{
-	int				content;
-	struct s_stack	*next;
-}	t_stack;
-
 // --- COMANDS ---
+void	sa(t_list **a);
+void	sb(t_list **b);
+void	ss(t_list **a, t_list **b);
 
-void	sa(t_stack **a);
-void	sb(t_stack **b);
-void	ss(t_stack **a, t_stack **b);
+void	pa(t_list **a, t_list **b);
+void	pb(t_list **b, t_list **a);
 
-void    pa(t_stack **a, t_stack **b);
-void    pb(t_stack **b, t_stack **a);
+void	ra(t_list **a);
+void	rb(t_list **b);
+void	rr(t_list **a, t_list **b);
+
+void	rra(t_list **a);
+void	rrb(t_list **b);
+void	rrr(t_list **a, t_list **b);
+
+float compute_disorder(t_list *stack);
 
 #endif

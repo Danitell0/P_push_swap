@@ -1,31 +1,31 @@
 #include "push_swap.h"
 
-static void	swap_cmd(t_stack **stack)
+static void	swap_cmd(t_list **stack)
 {
 	int	temp;
 
 	if (!stack || !*stack || !(*stack)->next)
 		return ;
-	temp = (*stack)->content;
-	(*stack)->content = (*stack)->next->content;
-	(*stack)->next->content = temp;
+	temp = *(int *)(*stack)->content;
+	*(int *)(*stack)->content = *(int *)(*stack)->next->content;
+	*(int *)(*stack)->next->content = temp;
 }
 
-void	sa(t_stack **a)
+void	sa(t_list **a)
 {
 	swap_cmd(a);
-	write(1, "sa\n", 3);
+	ft_printf("sa\n");
 }
 
-void	sb(t_stack **b)
+void	sb(t_list **b)
 {
 	swap_cmd(b);
-	write(1, "sb\n", 3);
+	ft_printf("sb\n");
 }
 
-void	ss(t_stack **a, t_stack **b)
+void	ss(t_list **a, t_list **b)
 {
 	swap_cmd(a);
 	swap_cmd(b);
-	write(1, "ss\n", 3);
+	ft_printf("ss\n");
 }

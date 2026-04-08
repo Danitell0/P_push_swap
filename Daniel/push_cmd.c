@@ -1,25 +1,25 @@
 #include "push_swap.h"
 
-static void push_cmd(t_stack **src, t_stack **dst)
+static void	push_cmd(t_list **src, t_list **dst)
 {
-    t_stack *temp;
+	t_list	*temp;
 
-    if (!src || !*src)
-        return ;
-    temp = *src;
-    *src = (*src)->next;
-    temp->next = *dst;
-    *dst = temp;
+	if (!src || !*src)
+		return ;
+	temp = *src;
+	*src = (*src)->next;
+	temp->next = *dst;
+	*dst = temp;
 }
 
-void    pa(t_stack **a, t_stack **b)
+void	pa(t_list **a, t_list **b)
 {
-    push_cmd(a, b);
-    write(1, "pa\n", 3);
+	push_cmd(b, a);
+	ft_printf("pa\n");
 }
 
-void    pb(t_stack **b, t_stack **a)
+void	pb(t_list **b, t_list **a)
 {
-    push_cmd(a, b);
-    write(1, "pb\n", 3);
+	push_cmd(a, b);
+	ft_printf("pb\n");
 }
