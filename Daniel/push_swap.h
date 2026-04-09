@@ -21,4 +21,7 @@ void	rrr(t_list **a, t_list **b);
 
 float compute_disorder(t_list *stack);
 
+//STRATEGIES UTILS (convert to static)
+int	find_min(t_list	*stack);
+
 #endif

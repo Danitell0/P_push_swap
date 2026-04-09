@@ -60,7 +60,9 @@ int	main(void)
     disorder = compute_disorder(a);
 
     printf("%.1f\n", disorder);
-    // print_list(a, "a");
+
+    printf("%d\n", find_min(a));
+    print_list(a, "a");
 	// print_list(b, "b");
 
     // sa(&a);
