@@ -1,5 +1,6 @@
 *This project has been created as part of the 42 curriculum by masanz-s and danmorei*  
-[Martin personal github](https://github.com/martinnsanzz) / 
+[Martin personal github](https://github.com/martinnsanzz)
+
 [Daniel personal github](https://github.com/Danitell0)
 
 ---
@@ -28,8 +29,6 @@
 [Comparison Sorting Alghorithms](https://www.cs.usfca.edu/~galles/visualization/ComparisonSort.html)
 
 [Sort Visualizer](https://sortvisualizer.com/)
-
-[Push Swap Visualizer](https://saadloukili.github.io/Push-Swap-Visualizer/index.html)
 
 **AI usage:**
 
