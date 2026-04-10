@@ -13,6 +13,17 @@ void	print_list(t_list *stack, char *name)
     printf("\n");
 }
 
+int	*new_int(int value)
+{
+    int	*n;
+
+    n = malloc(sizeof(int));
+    if (!n)
+        return (NULL);
+    *n = value;
+    return (n);
+}
+
 void	free_stack(t_list **stack)
 {
     t_list	*tmp;
@@ -20,6 +31,7 @@ void	free_stack(t_list **stack)
     while (*stack)
     {
         tmp = (*stack)->next;
+        free((*stack)->content);
         free(*stack);
         *stack = tmp;
     }
@@ -27,56 +39,28 @@ void	free_stack(t_list **stack)
 
 // --- Main ---
 
-int	main(void)
+int	main(int argc, char **argv)
 {
     t_list	*a;
-	// t_list  *b;
-    float   disorder;
-    int      value1 = 6;
-    int      value2 = 4;
-    int      value3 = 2;
-    int      value4 = 8;
-    int      value5 = 14;
-    int      value6 = 258;
-    int      value7 = 1;
-    int      value8 = 100;
-    int      value9 = 80;
-
-
+    t_list	*b;
+    int		i;
+    int		*n;
 
     a = NULL;
-	// b = NULL; 
+    b = NULL;
+    i = 1;
+    print_list(a, "A");
+    print_list(b, "B");
+    while (i < argc)
+    {
+        n = new_int(ft_atoi(argv[i]));
+        ft_lstadd_back(&a, ft_lstnew(n));
+        i++;
+    }
+    simple_strat(&a, &b);
 
-    ft_lstadd_front(&a, ft_lstnew(&value1));
-    ft_lstadd_front(&a, ft_lstnew(&value2));
-    ft_lstadd_front(&a, ft_lstnew(&value3));
-    ft_lstadd_front(&a, ft_lstnew(&value4));
-    ft_lstadd_front(&a, ft_lstnew(&value5));
-    ft_lstadd_front(&a, ft_lstnew(&value6));
-    ft_lstadd_front(&a, ft_lstnew(&value7));
-    ft_lstadd_front(&a, ft_lstnew(&value8));
-    ft_lstadd_front(&a, ft_lstnew(&value9));
-
-    disorder = compute_disorder(a);
-
-    printf("%.1f\n", disorder);
-
-    printf("%d\n", find_min(a));
-    print_list(a, "a");
-	// print_list(b, "b");
-
-    // sa(&a);
-    // print_list(a, "a");
-	// print_list(b, "b");
-
-	// sa(&a);
-    // print_list(a, "a");
-	// print_list(b, "b");
-
-    // rra(&a);
-	// print_list(a, "a");
-	// print_list(b, "b");
-
+    print_list(a, "A");
+    print_list(b, "B");
     // free_stack(&a);
 	// free_stack(&b);
     return (0);

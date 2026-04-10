@@ -9,7 +9,7 @@ void	sb(t_list **b);
 void	ss(t_list **a, t_list **b);
 
 void	pa(t_list **a, t_list **b);
-void	pb(t_list **b, t_list **a);
+void	pb(t_list **a, t_list **b);
 
 void	ra(t_list **a);
 void	rb(t_list **b);
@@ -21,7 +21,6 @@ void	rrr(t_list **a, t_list **b);
 
 float compute_disorder(t_list *stack);
 
-//STRATEGIES UTILS (convert to static)
-int	find_min(t_list	*stack);
+void	simple_strat(t_list **a, t_list **b);
 
 #endif

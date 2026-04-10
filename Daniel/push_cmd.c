@@ -18,7 +18,7 @@ void	pa(t_list **a, t_list **b)
 	ft_printf("pa\n");
 }
 
-void	pb(t_list **b, t_list **a)
+void	pb(t_list **a, t_list **b)
 {
 	push_cmd(a, b);
 	ft_printf("pb\n");

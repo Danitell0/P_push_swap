@@ -44,7 +44,7 @@ float compute_disorder(t_list *stack)
 
 // 	disorder = compute_disorder(*a);
 // 	if(disorder < 0.2)
-// 		//LOW DISORDER(a, b);
+// 		simple_strat(a, b);
 // 	else if (0.2 < disorder && disorder < 0.5)
 // 		//MEDIUM DISORDER(a, b);
 // 	else if (disorder > .5)
