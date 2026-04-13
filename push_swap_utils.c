@@ -74,16 +74,23 @@ void	print_error(void)
 	exit (1);
 }
 
-void sum_operations(t_operations op, int *total)
+/**
+ * @brief Sums up all the actions used to sort out the list of numbers
+ * 
+ * @return The total sum of the actions
+ */
+int	sum_operations(t_operations op)
 {
+	int	total_operations;
 	int	swap;
 	int	push;
-	int rotate;
+	int	rotate;
 	int	rev_rotate;
 
 	swap = op.sa + op.sb + op.ss;
 	push = op.pa + op.pb;
 	rotate = op.ra + op.rb + op.rr;
 	rev_rotate = op.rra + op.rrb + op.rrr;
-	*total = swap + push + rotate + rev_rotate;
+	total_operations = swap + push + rotate + rev_rotate;
+	return (total_operations);
 }

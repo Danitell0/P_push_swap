@@ -2,7 +2,8 @@
 
 static int	find_min(t_list	*stack);
 
-void	simple_strat(t_list **stack_a, t_list **stack_b, t_operations *op, t_flags *flags)
+void	simple_strat(t_list **stack_a, t_list **stack_b,
+				t_operations *op, t_flags *flags)
 {
 	int	min_pos_index;
 	int	stack_size;
@@ -12,19 +13,21 @@ void	simple_strat(t_list **stack_a, t_list **stack_b, t_operations *op, t_flags 
 	{
 		stack_size = ft_lstsize(*stack_a);
 		min_pos_index = find_min(*stack_a);
-		if (min_pos_index < stack_size / 2)
+		if (min_pos_index == 0)
+			pb(stack_b, stack_a, op, flags->bench);
+		else if (min_pos_index < stack_size / 2)
 			while (min_pos_index--)
-				ra(stack_a, op);
-		else if (min_pos_index != 0)
+				ra(stack_a, op, flags->bench);
+		else
 		{
 			min_pos_index = stack_size - min_pos_index;
 			while (min_pos_index--)
-				rra(stack_a, op);
+				rra(stack_a, op, flags->bench);
 		}
-		pb(stack_b, stack_a, op);
+		pb(stack_b, stack_a, op, flags->bench);
 	}
 	while (*stack_b != NULL)
-		pa(stack_a, stack_b, op);
+		pa(stack_a, stack_b, op, flags->bench);
 }
 
 static int	find_min(t_list	*stack)

@@ -30,8 +30,6 @@
 
 [Sort Visualizer](https://sortvisualizer.com/)
 
-[Push Swap Visualizer](https://saadloukili.github.io/Push-Swap-Visualizer/index.html)
-
 **AI usage:**
 
 
