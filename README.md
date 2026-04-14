@@ -16,6 +16,8 @@
 
 # RESOURCES
 
+[Complex - Explanation of Quick Sort](https://me.dt.in.th/page/Quicksort/)
+
 [Medium - Explanation of Push_Swap](https://medium.com/@jamierobertdawson/push-swap-the-least-amount-of-moves-with-two-stacks-d1e76a71789a)
 
 [Wikipedia - Big O notation](https://en.wikipedia.org/wiki/Big_O_notation)
