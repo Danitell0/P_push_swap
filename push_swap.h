@@ -43,6 +43,7 @@ long	ft_atoi_strict(const char *nptr);
 int		ft_strcmp(const char *s1, const char *s2);
 void	delete_content(void *content);
 int		sum_operations(t_operations op);
+int		find_min(t_list	*stack);
 
 //TO BE DELETED
 //Printing functions to test
