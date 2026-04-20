@@ -1,10 +1,3 @@
-###
-### Build configuration for libft.a
-### - Compiles each libft source file into an object file in $(OBJS_DIR)
-### - Packs all object files into the static library $(NAME)
-### - Updates the library index so the linker can resolve symbols correctly
-###
-
 # COLORS
 GREEN = \033[1;92m
 RED = \033[1;91m
@@ -12,7 +5,7 @@ YELLOW = \033[1;93m
 RESET = \033[0m
 
 NAME = libft.a
-OBJS_DIR = objs# Directory used to store generated object files
+OBJS_DIR = objs
 
 SRCS = ft_isalpha.c \
 	ft_isdigit.c \
@@ -66,32 +59,22 @@ SRCS = ft_isalpha.c \
 	ft_printf_u_int.c \
 	ft_putnbr_base.c
 
-# Convert each source file name into its matching object path inside $(OBJS_DIR)
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 
-# Standard build tools and flags
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 
 all: $(NAME)
 
-# Build the static library from all compiled object files
 $(NAME): $(OBJS)
-# `ar` creates an archive file (.a) containing the object files
-# `r` replaces existing members in the archive if needed
-# `c` creates the archive if it does not already exist
 	@ar rc $(NAME) $(OBJS)
-# Generate/update the archive index so the linker can find symbols quickly
 	@ranlib $(NAME)
 
-# Compile each .c file into a .o file inside $(OBJS_DIR)
-# The order-only prerequisite ensures the directory exists before compilation
 $(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "$@ -> ${GREEN}compiled.${RESET}"
 
-# Create the object directory only if it does not already exist
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
@@ -103,8 +86,6 @@ fclean: clean
 	@$(RM) $(NAME)
 	@echo "${RED}libft removed.${RESET}"
 
-# Full rebuild from scratch
 re: fclean all
 
-# Declare targets that do not represent real files
 .PHONY: all clean fclean re

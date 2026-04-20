@@ -1,14 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_char.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: masanz-s <masanz-s@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/03 13:31:08 by masanz-s          #+#    #+#             */
+/*   Updated: 2026/04/03 13:32:45 by masanz-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-/**
- * @brief  Writes a single character to stdout and increments the output length counter.
- *
- * @details  Casts the integer `c` to `unsigned char` to normalize any sign-extended
- *           values before output. If the character is the null terminator '\0', it is
- *           written explicitly using `write(2)`. All other characters are forwarded 
- * 			 to `ft_putchar_fd` on fd 1. The length counter is unconditionally incremented
- * 			 by 1 after output.
- */
 void	ft_printf_char(int c, int *len)
 {
 	if (!len)

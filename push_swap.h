@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: masanz-s <masanz-s@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/17 16:17:35 by masanz-s          #+#    #+#             */
+/*   Updated: 2026/04/20 12:19:34 by masanz-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -14,7 +26,8 @@ typedef enum e_strategy
 
 typedef struct s_flags
 {
-	t_strategy	strategy;
+	t_strategy	user_strat;
+	t_strategy	sys_strat;
 	bool		bench;
 	int			n_flags;
 }	t_flags;
@@ -41,31 +54,27 @@ int		check_argv(int argc, char *argv[], int **unsorted_lst, t_flags *flags);
 void	print_error(void);
 long	ft_atoi_strict(const char *nptr);
 int		ft_strcmp(const char *s1, const char *s2);
-void	delete_content(void *content);
 int		sum_operations(t_operations op);
-int		find_min(t_list	*stack);
+void	set_flags(t_flags *flags, int flag);
 
-//TO BE DELETED
-//Printing functions to test
-void	print_stack(t_list *stack, char *var_name);
-void	print_flags(t_flags flags);
-void	print_lst(int *lst, int n_elements, char *msg);
+//Maths utils functions
+int		ft_sqrt(int nb);
 
 //Actions functions
-void	sa(t_list **stack_a, t_operations *op, bool bench);
-void	sb(t_list **stack_b, t_operations *op, bool bench);
-void	ss(t_list **stack_a, t_list **stack_b, t_operations *op, bool bench);
+void	sa(t_list **stack_a, t_operations *op);
+void	sb(t_list **stack_b, t_operations *op);
+void	ss(t_list **stack_a, t_list **stack_b, t_operations *op);
 
-void	pa(t_list **stack_a, t_list **stack_b, t_operations *op, bool bench);
-void	pb(t_list **stack_b, t_list **stack_a, t_operations *op, bool bench);
+void	pa(t_list **stack_a, t_list **stack_b, t_operations *op);
+void	pb(t_list **stack_b, t_list **stack_a, t_operations *op);
 
-void	ra(t_list **stack_a, t_operations *op, bool bench);
-void	rb(t_list **stack_b, t_operations *op, bool bench);
-void	rr(t_list **stack_a, t_list **stack_b, t_operations *op, bool bench);
+void	ra(t_list **stack_a, t_operations *op);
+void	rb(t_list **stack_b, t_operations *op);
+void	rr(t_list **stack_a, t_list **stack_b, t_operations *op);
 
-void	rra(t_list **stack_a, t_operations *op, bool bench);
-void	rrb(t_list **stack_b, t_operations *op, bool bench);
-void	rrr(t_list **stack_a, t_list **stack_b, t_operations *op, bool bench);
+void	rra(t_list **stack_a, t_operations *op);
+void	rrb(t_list **stack_b, t_operations *op);
+void	rrr(t_list **stack_a, t_list **stack_b, t_operations *op);
 
 //Alghoritm functions
 void	bench(t_flags flags, t_operations op, float disorder);
@@ -76,5 +85,6 @@ void	medium_strat(t_list **stack_a, t_list **stack_b,
 			t_operations *op, t_flags *flags);
 void	complex_strat(t_list **stack_a, t_list **stack_b,
 			t_operations *op, t_flags *flags);
+float	compute_disorder(t_list *stack_a);
 
 #endif

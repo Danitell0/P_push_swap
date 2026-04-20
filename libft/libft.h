@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: masanz-s <masanz-s@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/03 13:31:48 by masanz-s          #+#    #+#             */
+/*   Updated: 2026/04/13 10:05:42 by masanz-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 
@@ -61,13 +73,13 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
 
 //ft_printf functions
-int		ft_printf(const char *format, ...);
-void	ft_printf_hex(unsigned long num, char conv, int *len);
-void	ft_printf_int(int num, int *len);
-void	ft_printf_u_int(unsigned int num, int *len);
-void	ft_printf_ptr(void *p, int *len);
-void	ft_printf_str(char *s, int *len);
-void	ft_printf_char(int c, int *len);
-void	ft_putnbr_base(unsigned long num, const char *base, int *len);
+int				ft_printf(const char *format, ...);
+void			ft_printf_hex(unsigned long num, char conv, int *len);
+void			ft_printf_int(int num, int *len);
+void			ft_printf_u_int(unsigned int num, int *len);
+void			ft_printf_ptr(void *p, int *len);
+void			ft_printf_str(char *s, int *len);
+void			ft_printf_char(int c, int *len);
+void			ft_putnbr_base(unsigned long num, const char *base, int *len);
 
 #endif

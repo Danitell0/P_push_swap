@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: masanz-s <masanz-s@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/13 10:04:53 by masanz-s          #+#    #+#             */
+/*   Updated: 2026/04/17 16:16:42 by masanz-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void	init_flags(t_flags *flags);
@@ -36,7 +48,16 @@ static void	init_flags(t_flags *flags)
 {
 	flags->n_flags = 0;
 	flags->bench = false;
-	flags->strategy = ADAPTIVE;
+	flags->user_strat = ADAPTIVE;
+	flags->sys_strat = ADAPTIVE;
+}
+
+void	set_flags(t_flags *flags, int flag)
+{
+	if (flags->sys_strat == ADAPTIVE)
+		flags->user_strat = flag;
+	else
+		flags->user_strat = flags->sys_strat;
 }
 
 /**

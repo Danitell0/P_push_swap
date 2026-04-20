@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bench_mode.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: masanz-s <masanz-s@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/13 12:27:44 by masanz-s          #+#    #+#             */
+/*   Updated: 2026/04/20 12:14:05 by masanz-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
 static void	print_disorder(float disorder);
@@ -20,9 +32,9 @@ void	bench(t_flags flags, t_operations op, float disorder)
 	big_o[1] = "O(n√n)";
 	big_o[2] = "O(nlogn)";
 	print_disorder(disorder);
-	print_strat(strats[flags.strategy], big_o[flags.strategy - 1]);
+	print_strat(strats[flags.sys_strat], big_o[flags.user_strat - 1]);
 	print_operations("[bench] total_ops: ", sum_operations(op), 1);
-	print_operations("[bench] sa: ", op.sa, 0);
+	print_operations("[bench] sa:  ", op.sa, 0);
 	print_operations(" sb: ", op.sb, 0);
 	print_operations(" ss: ", op.ss, 0);
 	print_operations(" pa: ", op.pa, 0);
@@ -42,28 +54,27 @@ void	bench(t_flags flags, t_operations op, float disorder)
 static void	print_disorder(float disorder)
 {
 	int		percentage;
-	char	c;
+	int		fractional_digits;
 
 	ft_putstr_fd("[bench] disorder: ", 2);
 	if (disorder == 1)
 	{
-		ft_putendl_fd("100%", 2);
+		ft_putendl_fd("100.00%", 2);
 		return ;
 	}
 	else if (disorder == 0)
 	{
-		ft_putendl_fd("0%", 2);
+		ft_putendl_fd("00.00%", 2);
 		return ;
 	}
-	percentage = (int)(disorder * 100 + 0.5);
-	if (percentage >= 10)
-	{
-		c = '0' + percentage / 10;
-		write(2, &c, 1);
-	}
-	c = '0' + percentage % 10;
-	write(2, &c, 1);
-	ft_putendl_fd(".00%", 2);
+	percentage = disorder * 100;
+	fractional_digits = ((disorder * 100) - percentage) * 100;
+	ft_putnbr_fd(percentage, 2);
+	ft_putchar_fd('.', 2);
+	if (fractional_digits < 10)
+		ft_putnbr_fd(0, 2);
+	ft_putnbr_fd(fractional_digits, 2);
+	ft_putstr_fd("%\n", 2);
 }
 
 static void	print_strat(char *strat, char *big_o)

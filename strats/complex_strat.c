@@ -1,117 +1,99 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   complex_strat.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: masanz-s <masanz-s@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/13 10:04:46 by masanz-s          #+#    #+#             */
+/*   Updated: 2026/04/17 16:15:21 by masanz-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
-void	quick_sort(t_list **stack_a, t_list **stack_b, t_operations *op, int size, bool bench);
-static int	find_max_val(t_list *stack, int size);
-static int	find_min_val(t_list	*stack, int size);
-void	sort_chunk(t_list **src, t_list **dest, t_operations *op, bool bench);
+static int	max_bits(t_list *stack);
 
+/**
+ * @brief  Sorts stack_a using a radix sort algorithm over all bits of the
+ *         maximum value.
+ *
+ * @details  Iterates over each bit position (up to `max_bits` iterations). 
+ * 			 On each pass, every element in stack_a is inspected at bit 
+ * 			 position `i`: elements with bit `i` unset or 0 are pushed 
+ * 			 to stack_b, elements with bit `i` set  or 1 are rotated
+ *           to the bottom of stack_a. Once all elements are processed,
+ *           the entirety of stack_b is pushed back to stack_a. After all
+ *           bit passes, stack_a is sorted in ascending order.
+
+ * @note  Correctness depends entirely on values being normalized to
+ *        [0, stack_size - 1] before this function is called. Non-normalized
+ *        values will produce incorrect bit inspection and a wrong sort order.
+ *        stack_b is expected to be empty on entry; leftover elements will
+ *        be pushed back into stack_a and corrupt the result.
+ */
 void	complex_strat(t_list **stack_a, t_list **stack_b,
 				t_operations *op, t_flags *flags)
 {
 	int	stack_size;
+	int	restore;
+	int	i;
+	int	bits;
 
-	stack_size = ft_lstsize(*stack_a);
-	flags->strategy = COMPLEX;
-	ft_printf("Inside complex strat\n");
-	quick_sort(stack_a, stack_b, op, stack_size, flags->bench);
+	set_flags(flags, COMPLEX);
+	bits = max_bits(*stack_a);
+	i = 0;
+	while (i < bits)
+	{
+		stack_size = ft_lstsize(*stack_a);
+		while (stack_size > 0)
+		{
+			if (((*(int *)(*stack_a)->content >> i) & 1) == 0)
+				pb(stack_b, stack_a, op);
+			else
+				ra(stack_a, op);
+			stack_size--;
+		}
+		restore = ft_lstsize(*stack_b);
+		while (restore--)
+			pa(stack_a, stack_b, op);
+		i++;
+	}
 }
 
-void	quick_sort(t_list **src, t_list **dest, t_operations *op, int size, bool bench)
+/**
+ * @brief  Computes the number of bits required to represent the maximum
+ *         value present in the stack.
+ *
+ * @details  Determines the stack size via `ft_lstsize`, then treats
+ *           `stack_size - 1` as the maximum possible value. Counts the
+ *           number of bit-shift operations needed to reduce that value to
+ *           zero, effectively computing `floor(log2(max_value)) + 1`.
+ *
+ * @return int — The bit-width of `stack_size - 1`.
+ *               Returns 0 if the stack is empty or contains one element.
+ *               Returns 1 if stack_size == 2, 2 if stack_size <= 4, etc.
+ *
+ * @note  The result is only meaningful when stack values have been
+ *        normalized to the range [0, stack_size - 1] beforehand.
+ *        Calling this on a non-normalized stack will produce a bit count
+ *        inconsistent with the actual content.
+ */
+static int	max_bits(t_list *stack)
 {
-	int	pivot1;
-	int	pivot2;
-	int	min;
-	int	max;
-	int	counter;
-	int	size_top;
-	int	size_middle;
-	int	size_bottom;
-
-	size_top = 0;
-	size_middle = 0;
-	size_bottom = 0;
-	counter = 0;
-	min = find_min_val(*src, size);
-	max = find_max_val(*src, size);
-	pivot1 = (min + (max - min) / 3);
-	pivot2 = (min + 2 * (max - min) / 3);
-	if (size <= 3 || pivot1 == pivot2)
-	{
-		sort_chunk(src, dest, op, bench);
-		return ;
-	}
-	while (counter++ < size)
-	{
-		if (*(int *)(*src)->content <= pivot1)
-		{
-			pb(dest, src, op, bench);
-			rb(dest, op, bench);
-			size_bottom += 1;
-		}
-		else if (*(int *)(*src)->content <= pivot2)
-		{
-			pb(dest, src, op, bench);
-			size_middle += 1;
-		}
-		else if (*(int *)(*src)->content > pivot2)
-		{
-			ra(src, op, bench);
-			size_top += 1;
-		}
-	}
-	quick_sort(src, dest, op, size_top, bench);
-	quick_sort(dest, src, op, size_middle, bench);
-	quick_sort(dest, src, op, size_bottom, bench);
-}
-
-void	sort_chunk(t_list **src, t_list **dest, t_operations *op, bool bench)
-{
-	int	min_pos_index;
 	int	stack_size;
+	int	max_value;
+	int	bits;
 
-	while (*src != NULL)
+	if (!stack)
+		return (0);
+	stack_size = ft_lstsize(stack);
+	max_value = stack_size - 1;
+	bits = 0;
+	while (max_value)
 	{
-		stack_size = ft_lstsize(*src);
-		min_pos_index = find_min(*src);
-		if (min_pos_index < stack_size / 2)
-			while (min_pos_index--)
-				ra(src, op, bench);
-		else if (min_pos_index != 0)
-		{
-			min_pos_index = stack_size - min_pos_index;
-			while (min_pos_index--)
-				rra(src, op, bench);
-		}
-		pa(dest, src, op, bench);
+		bits++;
+		max_value >>= 1;
 	}
-	while (*src != NULL)
-		pb(dest, src, op, bench);
-}
-
-static int	find_max_val(t_list	*stack, int size)
-{
-	int		max;
-
-	max = *(int *)stack->content;
-	while (stack != NULL && size-- > 0)
-	{
-		if (*(int *)stack->content > max)
-			max = *(int *)stack->content;
-		stack = stack->next;
-	}
-	return (max);
-}
-
-static int	find_min_val(t_list	*stack, int size)
-{
-	int		min;
-
-	min = *(int *)stack->content;
-	while (stack != NULL && size-- > 0)
-	{
-		if (*(int *)stack->content < min)
-			min = *(int *)stack->content;
-		stack = stack->next;
-	}
-	return (min);
+	return (bits);
 }

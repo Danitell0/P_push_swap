@@ -568,7 +568,6 @@ typedef struct s_stack
 | File | Responsibility |
 |---|---|
 | `main.c` | Entry point, argument parsing, stack initialization |
-| `push_swap_utils.c` | Extra utils functions |
 | `push_swap.h` | All headers, structs, and function prototypes |
 | `validate.c` | Input validation and error handling |
 | `arg_norm.c` | Index normalization — maps values to ranked indices |

@@ -1,14 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_int.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: masanz-s <masanz-s@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/03 13:31:11 by masanz-s          #+#    #+#             */
+/*   Updated: 2026/04/03 13:32:22 by masanz-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-/**
- * @brief  Writes a decimal integer to stdout and adds its digit count to the length counter.
- *
- * @details  Converts `num` to its string representation via `ft_itoa` solely to
- *           determine the printed length. The actual output is performed by
- *           `ft_putnbr_fd` on fd 1.
- * 
- * @note  Relies on `ft_itoa` for length measurement and `ft_putnbr_fd` for output.
- */
 void	ft_printf_int(int num, int *len)
 {
 	char	*s_num;

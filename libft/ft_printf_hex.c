@@ -1,13 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_hex.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: masanz-s <masanz-s@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/03 13:31:10 by masanz-s          #+#    #+#             */
+/*   Updated: 2026/04/03 13:32:42 by masanz-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-/**
- * @brief  Writes an unsigned long integer to stdout in hexadecimal and updates the length counter.
- *
- * @details  Selects lowercase ("0123456789abcdef") or uppercase ("0123456789ABCDEF")
- *           hex representation based on `conv`, then delegates conversion and output
- *           to `ft_putnbr_base`. Returns early if `len` is NULL. If `conv` is neither
- *           'x' nor 'X', the function is a no-op and `len` is not modified.
- */
 void	ft_printf_hex(unsigned long num, char conv, int *len)
 {
 	const char	*lower_base;

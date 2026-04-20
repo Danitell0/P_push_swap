@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simple_strat.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: masanz-s <masanz-s@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/13 10:04:49 by masanz-s          #+#    #+#             */
+/*   Updated: 2026/04/20 12:18:58 by masanz-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
-int	find_min(t_list	*stack);
+static int	find_min(t_list	*stack);
 
 /**
  * @brief	Sorts stack_a using a selection sort strategy. It repeatedly finds
@@ -25,24 +37,24 @@ void	simple_strat(t_list **stack_a, t_list **stack_b,
 	int	min_pos_index;
 	int	stack_size;
 
-	flags->strategy = SIMPLE;
+	set_flags(flags, SIMPLE);
 	while (*stack_a != NULL)
 	{
 		stack_size = ft_lstsize(*stack_a);
 		min_pos_index = find_min(*stack_a);
 		if (min_pos_index < stack_size / 2)
 			while (min_pos_index--)
-				ra(stack_a, op, flags->bench);
+				ra(stack_a, op);
 		else if (min_pos_index != 0)
 		{
 			min_pos_index = stack_size - min_pos_index;
 			while (min_pos_index--)
-				rra(stack_a, op, flags->bench);
+				rra(stack_a, op);
 		}
-		pb(stack_b, stack_a, op, flags->bench);
+		pb(stack_b, stack_a, op);
 	}
 	while (*stack_b != NULL)
-		pa(stack_a, stack_b, op, flags->bench);
+		pa(stack_a, stack_b, op);
 }
 
 /**
@@ -57,7 +69,7 @@ void	simple_strat(t_list **stack_a, t_list **stack_b,
  * @return	Zero-based index of the node containing the minimum integer value.
  * 			Returns 0 if the list is NULL or contains a single node.
  */
-int	find_min(t_list	*stack)
+static int	find_min(t_list	*stack)
 {
 	t_list	*min_node;
 	int		node_pos;

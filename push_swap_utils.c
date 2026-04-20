@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: masanz-s <masanz-s@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/17 16:16:35 by masanz-s          #+#    #+#             */
+/*   Updated: 2026/04/17 16:16:36 by masanz-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 /**
@@ -93,4 +105,36 @@ int	sum_operations(t_operations op)
 	rev_rotate = op.rra + op.rrb + op.rrr;
 	total_operations = swap + push + rotate + rev_rotate;
 	return (total_operations);
+}
+
+/**
+ * @brief  Computes the ceiling integer square root of a non-negative integer.
+ *
+ * @details  Uses the property that the sum of the first n odd numbers equals n².
+ *           Repeatedly subtracts successive odd numbers from `nb`, incrementing
+ *           the root counter each time. If `nb` reaches exactly 0, the input was
+ *           a perfect square and `res` is returned directly. If the loop exits
+ *           with `nb > 0`, the input was not a perfect square and `res + 1` is
+ *           returned as the ceiling.
+ *
+ * @return int — Ceiling of sqrt(nb). Returns 0 for negative input or 0.
+ */
+int	ft_sqrt(int nb)
+{
+	int	res;
+	int	odd;
+
+	odd = 1;
+	res = 0;
+	if (nb <= 0)
+		return (res);
+	while (odd <= nb)
+	{
+		nb -= odd;
+		res++;
+		odd += 2;
+	}
+	if (nb != 0)
+		return (res + 1);
+	return (res);
 }

@@ -1,7 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_strategy.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: masanz-s <masanz-s@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/17 16:27:10 by masanz-s          #+#    #+#             */
+/*   Updated: 2026/04/20 12:12:25 by masanz-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 #include <stdio.h>
-
-static float	compute_disorder(t_list *stack_a);
 
 /**
  * @brief  Selects and dispatches a sorting strategy based on flags 
@@ -12,6 +22,8 @@ static float	compute_disorder(t_list *stack_a);
  * 			 automatically. If a strategy was explicitly
  *           set via flags, dispatches directly to the corresponding
  * 			 function without computing disorder.
+ * @note   If bench mode is TRUE it prints the stats to stderr and
+ * 		   doesn't print the actions to stdout
  */
 void	select_strategy(t_list **stack_a, t_list **stack_b, t_flags *flags)
 {
@@ -20,7 +32,7 @@ void	select_strategy(t_list **stack_a, t_list **stack_b, t_flags *flags)
 
 	disorder = compute_disorder(*stack_a);
 	ft_memset(&operations, 0, sizeof(t_operations));
-	if (flags->strategy == ADAPTIVE)
+	if (flags->sys_strat == ADAPTIVE)
 	{
 		if (disorder < 0.2)
 			simple_strat(stack_a, stack_b, &operations, flags);
@@ -31,11 +43,11 @@ void	select_strategy(t_list **stack_a, t_list **stack_b, t_flags *flags)
 	}
 	else
 	{
-		if (flags->strategy == SIMPLE)
+		if (flags->sys_strat == SIMPLE)
 			simple_strat(stack_a, stack_b, &operations, flags);
-		else if (flags->strategy == MEDIUM)
+		else if (flags->sys_strat == MEDIUM)
 			medium_strat(stack_a, stack_b, &operations, flags);
-		else if (flags->strategy == COMPLEX)
+		else if (flags->sys_strat == COMPLEX)
 			complex_strat(stack_a, stack_b, &operations, flags);
 	}
 	if (flags->bench == true)
@@ -54,7 +66,7 @@ void	select_strategy(t_list **stack_a, t_list **stack_b, t_flags *flags)
  *                 0.0 indicates a fully sorted list or NULL/single-node input.
  *                 1.0 indicates a fully reversed list.
  */
-static float	compute_disorder(t_list *stack_a)
+float	compute_disorder(t_list *stack_a)
 {
 	float		mistakes;
 	float		total_pairs;
