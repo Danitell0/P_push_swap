@@ -1,44 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   checker_functions.c                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: masanz-s <masanz-s@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/20 14:53:31 by masanz-s          #+#    #+#             */
-/*   Updated: 2026/04/20 14:53:32 by masanz-s         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   checker_functions_bonus.c                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: masanz-s <masanz-s@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/04/20 14:53:31 by masanz-s      #+#    #+#                 */
+/*   Updated: 2026/04/20 15:22:12 by danmorei      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
 
-static void sort_stack(t_list **stack_a, t_list **stack_b, char *action);
+static void	sort_stack(t_list **stack_a, t_list **stack_b, char *action);
 
 /**
- * @brief  Reads push_swap operation strings from stdin and applies them to the stacks.
+ * @brief	Reads push_swap operation strings from stdin and applies
+ * 			them to the stacks.
  *
  * @details  Calls get_next_line() in a loop to read one operation per line from
  *           file descriptor 0. Each line is dispatched to sort_stack() for
  *           execution, then freed. The loop terminates when get_next_line()
  *           returns NULL (EOF or read error). The trailing free(line) after
- *           the loop is unreachable dead code — line is always NULL at that point.
+ *           the loop is unreachable dead code — line is always
+ * 			 NULL at that point.
  */
 void	read_input(t_list **stack_a, t_list **stack_b)
 {
-    char  *line;
+	char	*line;
 
-    while (1)
-    {
-        line = get_next_line(0);
-        if (line == NULL)
+	while (1)
+	{
+		line = get_next_line(0);
+		if (line == NULL)
 			break ;
-        sort_stack(stack_a, stack_b, line);
-        free(line);
-    }
+		sort_stack(stack_a, stack_b, line);
+		free(line);
+	}
 }
 
 /**
- * @brief  Dispatches a single push_swap operation string to its handler function.
+ * @brief	Dispatches a single push_swap operation string to
+ * 			its handler function.
  *
  * @details  Compares the action string against all valid push_swap operation
  *           names (including their trailing newline). On a match, calls the
@@ -46,10 +49,10 @@ void	read_input(t_list **stack_a, t_list **stack_b)
  *           silently ignored. The function performs no stack modification of
  *           its own — it is a pure dispatcher.
  */
-static void sort_stack(t_list **stack_a, t_list **stack_b, char *action)
+static void	sort_stack(t_list **stack_a, t_list **stack_b, char *action)
 {
 	if (!action)
-		return;
+		return ;
 	if (ft_strcmp(action, "sa\n") == 0)
 		sa(stack_a);
 	else if (ft_strcmp(action, "sb\n") == 0)
